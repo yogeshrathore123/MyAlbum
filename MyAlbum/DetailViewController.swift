@@ -36,6 +36,9 @@ class DetailViewController: UIViewController {
     
     func fetchData() {
         if choosenAlbum != "" {
+            
+            saveButton.isHidden = true
+            saveButton.isEnabled = false
             // Fetch from Core Data
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -75,6 +78,9 @@ class DetailViewController: UIViewController {
                 
             }
         } else {
+            
+            saveButton.isHidden = false
+            saveButton.isEnabled = false
             nameTextField.text = ""
             locationTextField.text = ""
             dateTextField.text = ""
@@ -125,6 +131,7 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        saveButton.isEnabled = true
         imageView.image = info[.originalImage] as? UIImage
         self.dismiss(animated: true)
     }
